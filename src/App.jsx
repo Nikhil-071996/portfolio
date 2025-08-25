@@ -6,27 +6,27 @@ import Loader from "./components/Loader";
 function App() {
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    // If the page is already loaded (cached assets), remove loader immediately
-    if (document.readyState === "complete") {
-      setLoading(false);
-      return;
-    }
+  // useEffect(() => {
+  //   // If the page is already loaded (cached assets), remove loader immediately
+  //   if (document.readyState === "complete") {
+  //     setLoading(false);
+  //     return;
+  //   }
 
-    const handleLoad = () => {
-      setLoading(false);
-    };
+  //   const handleLoad = () => {
+  //     setLoading(false);
+  //   };
 
-    window.addEventListener("load", handleLoad);
+  //   window.addEventListener("load", handleLoad);
 
-    return () => {
-      window.removeEventListener("load", handleLoad);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("load", handleLoad);
+  //   };
+  // }, []);
 
   return (
     <>
-      {loading ? <Loader /> : <Banner />}
+      {loading ? <Loader /> : <Banner setLoading={setLoading} />}
     </>
   );
 }

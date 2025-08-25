@@ -5,7 +5,7 @@ import bannerImg from "../assets/img/bannerImage.png";
 import pencilSketch from "../assets/img/pencil-sketch.png";
 import { gsap } from "gsap";
 
-export default function Banner() {
+export default function Banner({setLoading}) {
   const canvasRef = useRef(null);
   const imageRef = useRef(null);
   const maskImgRef = useRef(null);
@@ -82,6 +82,8 @@ export default function Banner() {
       },
     });
   };
+
+  setLoading(false)
 
   window.addEventListener("mousemove", handleMouseMove);
   canvas.addEventListener("click", handleClick);
