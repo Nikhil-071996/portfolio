@@ -1,34 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./App.css";
 import Banner from "./components/Banner";
 import Loader from "./components/Loader";
 
-function App() {
-  const [loading, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //   // If the page is already loaded (cached assets), remove loader immediately
-  //   if (document.readyState === "complete") {
-  //     setLoading(false);
-  //     return;
-  //   }
-
-  //   const handleLoad = () => {
-  //     setLoading(false);
-  //   };
-
-  //   window.addEventListener("load", handleLoad);
-
-  //   return () => {
-  //     window.removeEventListener("load", handleLoad);
-  //   };
-  // }, []);
+export default function App() {
+  const [bannerReady, setBannerReady] = useState(false);
 
   return (
     <>
-      {loading ? <Loader /> : <Banner setLoading={setLoading} />}
+      <Banner onReady={() => setBannerReady(true)} />
+      {!bannerReady && <Loader />} {/* overlay while Banner loads */}
     </>
   );
 }
-
-export default App;
