@@ -20,6 +20,8 @@
 
 .banner-container{
   display: flex;
+  height: 100vh;
+
 }
 
 .banner-container .col-1{
@@ -72,7 +74,7 @@ color: #1a1a1a;
 
 .reveal-canvas {
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
   z-index: 10;
   cursor: pointer;
