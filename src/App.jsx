@@ -1,18 +1,22 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import Banner from "./components/Banner";
-import ParallaxScene from "./components/ParallaxScene";
 import Loader from "./components/Loader";
 
 function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // If the page is already loaded (cached assets), remove loader immediately
+    if (document.readyState === "complete") {
+      setLoading(false);
+      return;
+    }
+
     const handleLoad = () => {
       setLoading(false);
     };
 
-    // When all assets (images, css, fonts) are loaded
     window.addEventListener("load", handleLoad);
 
     return () => {
@@ -23,7 +27,6 @@ function App() {
   return (
     <>
       {loading ? <Loader /> : <Banner />}
-      {/* <ParallaxScene /> can also go here after loader */}
     </>
   );
 }
