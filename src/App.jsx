@@ -5,13 +5,13 @@ import Loader from "./components/Loader";
 import Portfolio from "./components/portfolio/Portfolio";
 
 export default function App() {
-  const [bannerReady, setBannerReady] = useState(true);
+  const [bannerReady, setBannerReady] = useState(false);
 
   return (
     <>
+      {!bannerReady && <Loader />} 
       <Banner onReady={() => setBannerReady(true)} />
       <Portfolio />
-      {!bannerReady && <Loader />} 
     </>
   );
 }
