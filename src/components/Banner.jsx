@@ -4,11 +4,16 @@ import eraserSvg from "../assets/img/eraserSvg2.svg";
 import bannerImg from "../assets/img/bannerImage.png";
 import pencilSketch from "../assets/img/pencil-sketch.png";
 import { gsap } from "gsap";
+import { MotionPathPlugin } from "gsap/MotionPathPlugin";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
 
 export default function Banner({ onReady }) {
   const canvasRef = useRef(null);
   const imageRef = useRef(null);
   const maskImgRef = useRef(null);
+  const movingText = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -90,13 +95,40 @@ export default function Banner({ onReady }) {
     };
   }, [onReady]);
 
+  useEffect(() => {
+  gsap.to(movingText.current, {
+    duration: 4,
+    ease: "power1.inOut",
+    motionPath: {
+      path: "#textPath",
+      align: "#textPath",
+      alignOrigin: [0.5, 0.5],
+    },
+    scrollTrigger: {
+      trigger: ".banner-container",   // element that starts the scroll animation
+      start: "top -10%",            // when top of banner hits center of viewport
+      end: "bottom top",           // when bottom of banner hits center
+      scrub: true,                    // link animation progress to scroll
+      onUpdate: (self) => {
+        if (self.progress > 0.5) {
+          movingText.current.textContent = "Portfolio";
+        } else {
+          movingText.current.textContent = "Developer";
+        }
+      },
+    },
+  });
+}, []);
+
+
+
   return (
     <div className="reveal-container">
       <div className="banner-container">
         <div className="col-1">
           <h3>Hi</h3>
           <h1>I'm Nikhil Kachi</h1>
-          <h2>Front-End Developer</h2>
+          <h2>Front-End <span style={{opacity:0}}>Developer</span> <div ref={movingText} style={{ zIndex: 1000 }}>Developer</div></h2>
         </div>
         <div className="col-2">
           <div className="reveal-text">
@@ -105,6 +137,16 @@ export default function Banner({ onReady }) {
           </div>
         </div>
       </div>
+
+      <svg width="100%" height="100%" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet" style={{ position: "absolute", bottom: 0, left: 0, opacity:0 }}>
+        <path
+          id="textPath"
+          d="M225.87,546.698 C464.639,568.261 402.046,1223.517 775.417,1115.391 " // adjust path as per your layout
+          stroke="transparent"
+          strokeWidth="2"
+          fill="none"
+        />
+      </svg>
     </div>
   );
 }
