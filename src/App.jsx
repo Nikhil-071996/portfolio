@@ -16,7 +16,7 @@ export default function App() {
   const movingText = useRef(null);
 
   useEffect(() => {
-  if (textStartRef.current && textEndRef.current && movingText.current) {
+  if (textStartRef.current && textEndRef.current) {
     const startRect = textStartRef.current.getBoundingClientRect();
     const endRect = textEndRef.current.getBoundingClientRect();
 
@@ -25,14 +25,14 @@ export default function App() {
     const deltaY = endRect.top - startRect.top;
 
     // Place movingText at start
-    gsap.set(movingText.current, {
-      position: "absolute",
-      top: startRect.top + window.scrollY, // absolute position on page
-      left: startRect.left + window.scrollX,
-    });
+    // gsap.set(movingText.current, {
+    //   position: "absolute",
+    //   top: startRect.top + window.scrollY, // absolute position on page
+    //   left: startRect.left + window.scrollX,
+    // });
 
     // Animate only the difference
-    gsap.to(movingText.current, {
+    gsap.to(textStartRef.current, {
       x: deltaX,
       y: deltaY,
       ease: "none",
@@ -41,17 +41,18 @@ export default function App() {
         start: "top top",
         end: "80% top",
         scrub: true,
+        markers: true,
         onUpdate: (self) => {
           if (self.progress > 0.9) {
-            movingText.current.textContent = "Portfolio";
+            textStartRef.current.textContent = "Portfolio";
           } else {
-            movingText.current.textContent = "Developer";
+            textStartRef.current.textContent = "Developer";
           }
         },
       },
     });
   }
-}, []);
+}, [textStartRef]);
 
 
 
