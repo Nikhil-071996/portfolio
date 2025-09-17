@@ -5,7 +5,9 @@ import Loader from "./components/Loader";
 import Portfolio from "./components/portfolio/Portfolio";
 import gsap from "gsap";
 import ContactSection from "./components/contact/ContactSection";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+    gsap.registerPlugin(ScrollTrigger);
 export default function App() {
   const [bannerReady, setBannerReady] = useState(false);
 
