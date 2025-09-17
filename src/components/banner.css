@@ -1,0 +1,123 @@
+.reveal-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reveal-text {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.banner-container{
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+
+}
+
+.banner-container .col-1{
+  width: 50%;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #28282B;
+}
+
+.banner-container .col-1 h1{
+color: #1a1a1a;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.05);
+
+  font-weight: bold;
+  font-size: 74px;
+}
+
+.banner-container .col-1 h2{
+color: #1a1a1a;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.05);
+  font-weight: bold;
+  font-size: 48px;
+
+}
+
+.banner-container .col-1 h3{
+color: #1a1a1a;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.05);
+
+  font-weight: bold;
+  font-size: 24px;
+
+}
+
+
+
+.banner-container .col-2{
+  width: 50%;
+  
+}
+
+.reveal-text img{
+    width: 100%;
+    height: auto;
+}
+
+.reveal-canvas {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.reveal-canvas img{
+    object-fit: cover;
+
+}
+
+@media (max-width: 990px) {
+  .banner-container{
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    text-align: center;
+
+    height: 80vh;
+  }
+
+  .reveal-container{
+    height: 80vh;
+
+  }
+
+  .banner-container .col-1{
+    width: 100%;
+    padding: 10px;
+  }
+  .banner-container .col-2{
+    width: 100%;
+  }
+
+  .banner-container .col-1 h3{
+    font-size: 22px;
+  }
+
+  .banner-container .col-1 h1{
+    font-size: 42px;
+  }
+
+  .banner-container .col-1 h2{
+    font-size: 32px;
+  }
+
+}
