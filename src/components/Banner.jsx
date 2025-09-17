@@ -103,7 +103,8 @@ export default function Banner({ onReady, textStartRef, movingText }) {
         <div className="col-1">
           <h3>Hi</h3>
           <h1>I'm Nikhil Kachi</h1>
-          <h2>Front-End <span style={{opacity:0}} ref={textStartRef}>Developer</span> <div ref={movingText} style={{ zIndex: 1000 }}>Developer</div></h2>
+          <h2>Front-End <span style={{opacity:0}} ref={textStartRef}>Developer</span></h2>
+          <h2 ref={movingText} style={{ zIndex: 1000 }}>Developer</h2>
         </div>
         <div className="col-2">
           <div className="reveal-text">
