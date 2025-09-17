@@ -24,12 +24,7 @@ export default function App() {
     const deltaX = endRect.left - startRect.left;
     const deltaY = endRect.top - startRect.top;
 
-    // Place movingText at start
-    // gsap.set(movingText.current, {
-    //   position: "absolute",
-    //   top: startRect.top + window.scrollY, // absolute position on page
-    //   left: startRect.left + window.scrollX,
-    // });
+    
 
     // Animate only the difference
     gsap.to(textStartRef.current, {
@@ -41,7 +36,6 @@ export default function App() {
         start: "top top",
         end: "80% top",
         scrub: true,
-        markers: true,
         onUpdate: (self) => {
           if (self.progress > 0.9) {
             textStartRef.current.textContent = "Portfolio";
