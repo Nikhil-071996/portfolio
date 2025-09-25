@@ -34,7 +34,7 @@ export default function App() {
           scrollTrigger: {
             trigger: ".banner-container",
             start: windowWidth > 990 ? "top top" : "top top",
-            end: windowWidth > 990 ? "80% top" : "80% top",
+            end: windowWidth > 990 ? "80% top" : "100% top",
             scrub: true,
             markers: true,
             onUpdate: (self) => {
