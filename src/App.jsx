@@ -16,7 +16,6 @@ export default function App() {
   const textEndRef = useRef(null);
 
   useEffect(() => {
-    // Create a context specific to this component
     const ctx = gsap.context(() => {
       if (textStartRef.current && textEndRef.current) {
         const windowWidth = window.innerWidth;
@@ -36,7 +35,6 @@ export default function App() {
             start: windowWidth > 990 ? "top top" : "top top",
             end: windowWidth > 990 ? "80% top" : "100% top",
             scrub: true,
-            markers: true,
             onUpdate: (self) => {
               if (self.progress > 0.9) {
                 textStartRef.current.textContent = "Portfolio";
@@ -47,18 +45,16 @@ export default function App() {
           },
         });
 
-        // optionally refresh after load
         setTimeout(() => {
           ScrollTrigger.refresh();
         }, 500);
       }
-    }, /* optional scope, e.g. root element: */);
+    }, );
 
-    // Cleanup when component unmounts or effect re-runs:
     return () => {
-      ctx.revert();  // this kills all animations and ScrollTriggers created inside the context
+      ctx.revert();  
     };
-  }, []); // run once after mount
+  }, []); 
 
   return (
     <>
