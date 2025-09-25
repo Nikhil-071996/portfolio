@@ -36,6 +36,7 @@ export default function App() {
         start: "top top",
         end: "80% top",
         scrub: true,
+        markers: true,
         onUpdate: (self) => {
           if (self.progress > 0.9) {
             textStartRef.current.textContent = "Portfolio";
