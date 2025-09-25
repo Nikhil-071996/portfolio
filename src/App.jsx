@@ -15,6 +15,8 @@ export default function App() {
   const textEndRef = useRef(null);
   const movingText = useRef(null);
 
+  const windowWidth = window.innerWidth;
+
   useEffect(() => {
   if (textStartRef.current && textEndRef.current) {
     const startRect = textStartRef.current.getBoundingClientRect();
@@ -33,8 +35,8 @@ export default function App() {
       ease: "none",
       scrollTrigger: {
         trigger: ".banner-container",
-        start: "top top",
-        end: "80% top",
+        start: windowWidth > 990 ? "top top" : "top top" ,
+        end: windowWidth > 990 ? "80% top" : "100% top" ,
         scrub: true,
         markers: true,
         onUpdate: (self) => {
