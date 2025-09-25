@@ -16,40 +16,48 @@ export default function App() {
   const textEndRef = useRef(null);
 
   useEffect(() => {
-    if (textStartRef.current && textEndRef.current) {
-      const windowWidth = window.innerWidth;
+    // Create a context specific to this component
+    const ctx = gsap.context(() => {
+      if (textStartRef.current && textEndRef.current) {
+        const windowWidth = window.innerWidth;
 
-      const startRect = textStartRef.current.getBoundingClientRect();
-      const endRect = textEndRef.current.getBoundingClientRect();
+        const startRect = textStartRef.current.getBoundingClientRect();
+        const endRect = textEndRef.current.getBoundingClientRect();
 
-      const deltaX = endRect.left - startRect.left;
-      const deltaY = endRect.top - startRect.top;
+        const deltaX = endRect.left - startRect.left;
+        const deltaY = endRect.top - startRect.top;
 
-      gsap.to(textStartRef.current, {
-        x: deltaX,
-        y: deltaY,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".banner-container",
-          start: windowWidth > 990 ? "top top" : "top top",
-          end: windowWidth > 990 ? "80% top" : "80% top",
-          scrub: true,
-          markers: true,
-          onUpdate: (self) => {
-            if (self.progress > 0.9) {
-              textStartRef.current.textContent = "Portfolio";
-            } else {
-              textStartRef.current.textContent = "Developer";
-            }
+        gsap.to(textStartRef.current, {
+          x: deltaX,
+          y: deltaY,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".banner-container",
+            start: windowWidth > 990 ? "top top" : "top top",
+            end: windowWidth > 990 ? "80% top" : "100% top",
+            scrub: true,
+            markers: true,
+            onUpdate: (self) => {
+              if (self.progress > 0.9) {
+                textStartRef.current.textContent = "Portfolio";
+              } else {
+                textStartRef.current.textContent = "Developer";
+              }
+            },
           },
-        },
-      });
+        });
 
-      // Refresh ScrollTrigger after fonts/images load
-      setTimeout(() => {
-        ScrollTrigger.refresh();
-      }, 500);
-    }
+        // optionally refresh after load
+        setTimeout(() => {
+          ScrollTrigger.refresh();
+        }, 500);
+      }
+    }, /* optional scope, e.g. root element: */);
+
+    // Cleanup when component unmounts or effect re-runs:
+    return () => {
+      ctx.revert();  // this kills all animations and ScrollTriggers created inside the context
+    };
   }, []); // run once after mount
 
   return (
