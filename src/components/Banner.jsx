@@ -16,84 +16,103 @@ export default function Banner({ onReady, textStartRef, movingText }) {
   
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    const imgElement = imageRef.current;
+  const canvas = canvasRef.current;
+  const ctx = canvas.getContext("2d");
+  const imgElement = imageRef.current;
 
-    imgElement.onload = () => {
-      canvas.width = imgElement.offsetWidth;
-      canvas.height = imgElement.offsetHeight;
+  const handleImageLoad = () => {
+    canvas.width = imgElement.offsetWidth;
+    canvas.height = imgElement.offsetHeight;
 
-      const sketch = new Image();
-      sketch.src = pencilSketch;
+    const sketch = new Image();
+    sketch.src = pencilSketch;
 
-      sketch.onload = () => {
-        ctx.drawImage(sketch, 0, 0, canvas.width, canvas.height);
+    sketch.onload = () => {
+      ctx.drawImage(sketch, 0, 0, canvas.width, canvas.height);
 
-        // 👈 Banner is fully ready now
-        if (onReady) onReady();
-      };
+      if (onReady) onReady();
     };
+  };
 
-    const maskImg = new Image();
-    maskImg.src = eraserSvg;
-    maskImgRef.current = maskImg;
+  if (imgElement.complete) {
+    handleImageLoad();
+  } else {
+    imgElement.onload = handleImageLoad;
+  }
 
-    const eraseSmooth = (x, y, baseSize = 120) => {
-      let size = 0;
-      const draw = () => {
+  // preload eraser image
+  const maskImg = new Image();
+  maskImg.src = eraserSvg;
+  maskImgRef.current = maskImg;
+
+  const eraseSmooth = (x, y, baseSize = 120) => {
+    let size = 0;
+    const draw = () => {
+      ctx.globalCompositeOperation = "destination-out";
+      ctx.drawImage(maskImgRef.current, x - size / 2, y - size / 2, size, size);
+      ctx.globalCompositeOperation = "source-over";
+    };
+    gsap.to({ s: 0 }, {
+      s: baseSize,
+      duration: 0.4,
+      ease: "power2.out",
+      onUpdate: function () {
+        size = this.targets()[0].s;
+        draw();
+      },
+    });
+  };
+
+  const handleMouseMove = (e) => {
+    const rect = canvas.getBoundingClientRect();
+    eraseSmooth(e.clientX - rect.left, e.clientY - rect.top);
+  };
+
+  const handleTouchMove = (e) => {
+    e.preventDefault(); 
+    const rect = canvas.getBoundingClientRect();
+    const touch = e.touches[0];
+    eraseSmooth(touch.clientX - rect.left, touch.clientY - rect.top);
+  };
+
+  const handleClick = (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    let radius = 0;
+
+    gsap.to({ r: 0 }, {
+      r: Math.max(canvas.width, canvas.height) * 2,
+      duration: 2,
+      ease: "power2.inOut",
+      onUpdate: function () {
+        radius = this.targets()[0].r;
         ctx.globalCompositeOperation = "destination-out";
-        ctx.drawImage(maskImgRef.current, x - size / 2, y - size / 2, size, size);
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+        ctx.fill();
         ctx.globalCompositeOperation = "source-over";
-      };
-      gsap.to({ s: 0 }, {
-        s: baseSize,
-        duration: 0.4,
-        ease: "power2.out",
-        onUpdate: function () {
-          size = this.targets()[0].s;
-          draw();
-        },
-      });
-    };
+      },
+      onComplete: () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      },
+    });
+  };
 
-    const handleMouseMove = (e) => {
-      const rect = canvas.getBoundingClientRect();
-      eraseSmooth(e.clientX - rect.left, e.clientY - rect.top);
-    };
+  window.addEventListener("mousemove", handleMouseMove);
+  canvas.addEventListener("click", handleClick);
 
-    const handleClick = (e) => {
-      const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      let radius = 0;
+  canvas.addEventListener("touchmove", handleTouchMove, { passive: false });
+  canvas.addEventListener("touchstart", handleTouchMove, { passive: false });
 
-      gsap.to({ r: 0 }, {
-        r: Math.max(canvas.width, canvas.height) * 2,
-        duration: 2,
-        ease: "power2.inOut",
-        onUpdate: function () {
-          radius = this.targets()[0].r;
-          ctx.globalCompositeOperation = "destination-out";
-          ctx.beginPath();
-          ctx.arc(x, y, radius, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.globalCompositeOperation = "source-over";
-        },
-        onComplete: () => {
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-        },
-      });
-    };
+  return () => {
+    window.removeEventListener("mousemove", handleMouseMove);
+    canvas.removeEventListener("click", handleClick);
 
-    window.addEventListener("mousemove", handleMouseMove);
-    canvas.addEventListener("click", handleClick);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      canvas.removeEventListener("click", handleClick);
-    };
-  }, [onReady]);
+    canvas.removeEventListener("touchmove", handleTouchMove);
+    canvas.removeEventListener("touchstart", handleTouchMove);
+  };
+}, [onReady]);
 
 
 
