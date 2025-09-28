@@ -16,6 +16,7 @@ export default function App() {
   const textEndRef = useRef(null);
 
   useEffect(() => {
+    if (!bannerReady) return;
     const ctx = gsap.context(() => {
       if (textStartRef.current && textEndRef.current) {
         const windowWidth = window.innerWidth;
@@ -33,7 +34,7 @@ export default function App() {
           scrollTrigger: {
             trigger: ".banner-container",
             start: windowWidth > 990 ? "top top" : "top top",
-            end: windowWidth > 990 ? "80% top" : "100% top",
+            end: windowWidth > 990 ? "80% top" : "80% top",
             scrub: true,
             onUpdate: (self) => {
               if (self.progress > 0.9) {
@@ -54,7 +55,7 @@ export default function App() {
     return () => {
       ctx.revert();  
     };
-  }, []); 
+  }, [bannerReady]); 
 
   return (
     <>
