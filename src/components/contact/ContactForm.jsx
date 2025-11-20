@@ -8,7 +8,6 @@ const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: "",
     message: ""
   });
 
@@ -19,9 +18,6 @@ const ContactForm = () => {
   const handleChange = (e) => {
     let { name, value } = e.target;
 
-    if (name === "phone") {
-      value = value.replace(/\D/g, "").slice(0, 10); // only digits, max 10
-    }
 
     if (name === "message") {
       const words = value.trim().split(/\s+/);
@@ -46,10 +42,6 @@ const ContactForm = () => {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(formData.email.trim())) newErrors.email = "Invalid email address";
     }
-
-    if (!formData.phone.trim()) newErrors.phone = "Required";
-    else if (!/^[0-9]{10}$/.test(formData.phone.trim()))
-      newErrors.phone = "Phone number must be 10 digits";
 
     return newErrors;
   };
@@ -79,7 +71,7 @@ const ContactForm = () => {
         success: {
           render({ data }) {
             if (data?.data?.msg) {
-              setFormData({ name: "", email: "", phone: "", message: "" });
+              setFormData({ name: "", email: "", message: "" });
               setToken("");
               return data.data.msg;
             }
@@ -122,17 +114,6 @@ const ContactForm = () => {
           required
         />
         {errors.email && <span className="error">{errors.email}</span>}
-
-        <input
-          type="tel"
-          name="phone"
-          placeholder="Your Phone"
-          value={formData.phone}
-          onChange={handleChange}
-          maxLength="10"
-          required
-        />
-        {errors.phone && <span className="error">{errors.phone}</span>}
 
         <textarea
           name="message"
