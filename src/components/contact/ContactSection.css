@@ -1,10 +1,10 @@
 .contact-section {
   padding: 70px;
-  background-color: #f9f9f9;
+  background-color: #1a1a1a;
+  color: #fff;
 }
 
 .contact-section h2 {
-  color: #1a1a1a;
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.05);
   font-weight: bold;
   font-size: 48px;
@@ -29,53 +29,111 @@
 .contact-form textarea {
   width: 100%;
   padding: 12px;
+  background-color: transparent;
   margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border: none;
+  border-bottom: 1px solid #fff;
   outline: none;
   font-size: 16px;
+  color: #fff;
+  resize: none;
   transition: border-color 0.3s;
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-  border-color: #1a1a1a;
+  border-color: #fff;
 }
 
 .contact-form textarea {
-  resize: vertical;
   height: 150px;
 }
 
 .submit-btn {
-  background-color: #1a1a1a;
+  background-color: transparent;
   color: #fff;
   border: none;
-  padding: 12px 25px;
+  padding: 10px 30px;
   border-radius: 8px;
   cursor: pointer;
+  display: block;
   font-size: 16px;
-  transition: background-color 0.3s;
+  position: relative;
+  z-index: 1;
 }
 
-.submit-btn:hover {
-  background-color: #333;
+.submit-btn::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 7px !important;
+  padding: 3px;
+  background: linear-gradient(90deg, #F7BA2C, #EA5459);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  transition: background 0.3s 
+ease;
+}
+
+.submit-btn::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #F7BA2C, #EA5459);
+    z-index: -1;
+    border-radius: 7px !important;
+    transition: width 0.4s 
+ease;
+}
+
+.submit-btn:hover::before {
+  width: 100%;
+}
+
+.submit-btn:active{
+  scale: 0.9;
 }
 
 /* Contact Info & Socials */
+
+.contact-info-container{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .contact-info-container p {
-  margin: 15px 0;
   font-size: 16px;
-  color: #1a1a1a;
+  color: #fff;
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
+.info-content{
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+
+.info-content img{
+  width: 25px;
+  filter: invert();
+}
+
 .social-icons {
   display: flex;
+  align-items: center;
   gap: 15px;
-  margin: 20px 0;
+  margin-top: 45px;
+  
 }
 
 .social-icons a {
@@ -84,24 +142,75 @@
   transition: color 0.3s;
 }
 
-.social-icons a:hover {
-  color: #007bff;
+.social-icons a img{
+  width: 40px;
+  filter: grayscale();
+  transition: all ease 0.3s;
+}
+
+.social-icons a.github-icon img{
+  filter: contrast(0.5);
+}
+
+.social-icons a img:hover{
+  scale: 1.1;
+  filter: none;
+}
+
+.social-icons a.github-icon img:hover{
+  filter: invert();
+  scale: 1.1;
 }
 
 .download-cv-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: #1a1a1a;
+  background-color: transparent;
   color: #fff;
-  padding: 10px 20px;
+  padding: 7px 30px;
   border-radius: 8px;
   text-decoration: none;
+  display: block;
+  position: relative;
+  z-index: 1;
   transition: background-color 0.3s;
 }
 
-.download-cv-btn:hover {
-  background-color: #333;
+.download-cv-btn::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 7px !important;
+  padding: 3px;
+  background: linear-gradient(90deg, #61F4DE, #6E78FF);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  transition: background 0.3s 
+ease;
+}
+
+.download-cv-btn::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #61F4DE, #6E78FF);
+    z-index: -1;
+    border-radius: 7px !important;
+    transition: width 0.4s 
+ease;
+}
+
+.download-cv-btn:hover::before {
+  width: 100%;
+}
+
+.download-cv-btn:active{
+  scale: 0.9;
 }
 
 /* Responsive */

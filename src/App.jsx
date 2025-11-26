@@ -6,6 +6,7 @@ import Portfolio from "./components/portfolio/Portfolio";
 import gsap from "gsap";
 import ContactSection from "./components/contact/ContactSection";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Footer from "./components/footer/Footer";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -66,6 +67,7 @@ export default function App() {
       />
       <Portfolio textEndRef={textEndRef} />
       <ContactSection />
+      <Footer />
     </>
   );
 }

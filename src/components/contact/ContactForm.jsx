@@ -73,9 +73,8 @@ const ContactForm = () => {
             if (data?.data?.msg) {
               setFormData({ name: "", email: "", message: "" });
               setToken("");
-              return data.data.msg;
+              return "Your message has been sent successfully. I will get back to you soon!";
             }
-            return "Message sent successfully!";
           }
         },
         error: {
@@ -92,7 +91,6 @@ const ContactForm = () => {
 
   return (
     <div className="contact-form-container">
-      <h2>Contact Me</h2>
       <form onSubmit={handleSubmit} className="contact-form" autoComplete="off">
 
         <input
