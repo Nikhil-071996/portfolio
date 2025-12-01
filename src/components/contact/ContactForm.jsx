@@ -126,10 +126,10 @@ const ContactForm = () => {
             onSuccess={(token) => setToken(token)}
             onError={() => setToken("")}
           />
+          <button type="submit" className="submit-btn" disabled={!token}>
+            Send Message
+          </button>
         </div>
-        <button type="submit" className="submit-btn" disabled={!token}>
-          Send Message
-        </button>
       </form>
     </div>
   );

@@ -7,17 +7,23 @@ import linkedIn from '../../assets/img/icons/linkedin.png'
 const ContactInfo = () => {
   return (
     <div className="contact-info-container">
-      <a href="mailto:nikhilkachi68@gmail.com" className="info-content">
-        <img src={email} alt="email" />
-        <p>nikhilkachi68@gmail.com</p>
-      </a>
-      <a href="tel:918805084119" className="info-content">
-        <img src={phone} alt="call" />
-        <p >+91 88050 84119</p>
-      </a>
-      <a href="/path-to-your-cv.pdf" download className="download-cv-btn">
-        Download CV
-      </a>
+      <div className="my-info">
+        <div className="my-contact">
+          <a href="mailto:nikhilkachi68@gmail.com" className="info-content">
+            <img src={email} alt="email" />
+            <p>nikhilkachi68@gmail.com</p>
+          </a>
+          <a href="tel:918805084119" className="info-content">
+            <img src={phone} alt="call" />
+            <p >+91 88050 84119</p>
+          </a>
+        </div>
+        <a href="/cv.pdf" download className="download-cv-btn">
+          Download CV
+        </a>
+
+      </div>
+
       <div className="social-icons">
         <a href="https://github.com/Nikhil-071996" className="github-icon" target="_blank" rel="noreferrer">
           <img src={gitHub} alt="github" />
