@@ -11,6 +11,9 @@ import Skills from "./skills/Skills";
 gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
 
 export default function Banner({ onReady, textStartRef }) {
+
+  const windowWidth = window.innerWidth;
+  
   const canvasRef = useRef(null);
   const imageRef = useRef(null);
   const maskImgRef = useRef(null);
@@ -125,9 +128,13 @@ export default function Banner({ onReady, textStartRef }) {
           <h1>I'm Nikhil Kachi</h1>
           <h2>Front-End <div ref={textStartRef} style={{ display: "inline-block" }}>Developer</div></h2>
           {/* <h2 ref={movingText} style={{ zIndex: 1000 }}>Developer</h2> */}
-          <div className="skills-section-container">
-            <Skills />
-          </div>
+          {
+            windowWidth > 990 
+            &&
+            <div className="skills-section-container">
+              <Skills />
+            </div>
+          }
         </div>
         <div className="col-2">
           <div className="reveal-text">
@@ -135,17 +142,17 @@ export default function Banner({ onReady, textStartRef }) {
             <img src={bannerImg} alt="bannerImg" ref={imageRef} />
           </div>
         </div>
+
+        {
+            windowWidth < 990 
+            &&
+            <div className="skills-section-container">
+              <Skills />
+            </div>
+          }
       </div>
 
-      {/* <svg width="100%" height="100%" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet" style={{ position: "absolute", bottom: 0, left: 0, opacity:0 }}>
-        <path
-          id="textPath"
-          d="M225.87,546.698 C464.639,568.261 402.046,1223.517 775.417,1115.391 " 
-          stroke="transparent"
-          strokeWidth="2"
-          fill="none"
-        />
-      </svg> */}
+      
     </div>
   );
 }

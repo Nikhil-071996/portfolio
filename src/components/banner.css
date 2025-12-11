@@ -89,7 +89,6 @@ color: #1a1a1a;
   width: 80%;
   margin-top: 100px;
   position: relative;
-
 }
 
 .skills-section-container::before, .skills-section-container::after{
@@ -119,17 +118,18 @@ color: #1a1a1a;
     gap: 30px;
     text-align: center;
 
-    height: 80vh;
+    height: auto;
   }
 
   .reveal-container{
-    height: 80vh;
+    height: auto;
 
   }
 
   .banner-container .col-1{
     width: 100%;
     padding: 10px;
+    padding-top: 50px;
   }
   .banner-container .col-2{
     width: 100%;
@@ -145,6 +145,13 @@ color: #1a1a1a;
 
   .banner-container .col-1 h2{
     font-size: 32px;
+  }
+
+  .skills-section-container{
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: relative;
   }
 
 }

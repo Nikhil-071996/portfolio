@@ -49,6 +49,19 @@
 
 }
 
+/* .iframe-card{
+  border: none;
+  width: 80%;
+  height: auto;
+  aspect-ratio: 1200/800;
+  transform: scale(0.3);
+  pointer-events: none;
+  position: absolute;
+  border-radius: 12px;
+  overflow: hidden;
+  scrollbar-width: 0;
+} */
+
 .portfolio-content {
   padding: 15px;
 }
@@ -113,6 +126,11 @@
   }
 
   .portfolio-card{
+    width: 100%;
+    flex: 0 0 100% !important;
+  }
+
+  .skeleton-card {
     width: 100%;
     flex: 0 0 100% !important;
   }

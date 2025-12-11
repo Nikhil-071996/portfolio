@@ -65,6 +65,7 @@ export default function App() {
         onReady={() => setBannerReady(true)}
         textStartRef={textStartRef}
       />
+      
       <Portfolio textEndRef={textEndRef} />
       <ContactSection />
       <Footer />

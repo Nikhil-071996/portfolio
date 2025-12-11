@@ -238,6 +238,14 @@ ease;
     gap: 30px;
   }
 
+  .captcha-container{
+    flex-direction: column;
+  }
+
+  .submit-btn{
+    width: 100%;
+  }
+
   .contact-section h2 {
     font-size: 32px;
     margin-bottom: 30px;
