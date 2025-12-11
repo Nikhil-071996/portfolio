@@ -1,0 +1,30 @@
+
+.logo-slider {
+  overflow: hidden; 
+  white-space: nowrap; 
+  width: 100%;
+}
+
+.logo-track {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scroll var(--duration, 15s) linear infinite;
+}
+
+.logo-track img {
+  height: 50px;
+  margin: 0 1rem; 
+  vertical-align: middle;
+  transition: transform 0.3s ease; 
+}
+
+
+/* Keyframes to create leftward scrolling effect */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); /* Move left by 50% of the track width */
+  }
+}

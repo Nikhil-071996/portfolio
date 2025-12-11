@@ -85,6 +85,33 @@ color: #1a1a1a;
 
 }
 
+.skills-section-container{
+  width: 80%;
+  margin-top: 100px;
+  position: relative;
+
+}
+
+.skills-section-container::before, .skills-section-container::after{
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 120px;   
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.skills-section-container::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(255, 255, 255, 1), transparent);
+}
+
+.skills-section-container::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(255, 255, 255, 1), transparent);
+}
+
 @media (max-width: 990px) {
   .banner-container{
     flex-direction: column;

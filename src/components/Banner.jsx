@@ -6,10 +6,11 @@ import pencilSketch from "../assets/img/pencil-sketch.png";
 import { gsap } from "gsap";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Skills from "./skills/Skills";
 
 gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
 
-export default function Banner({ onReady, textStartRef, movingText }) {
+export default function Banner({ onReady, textStartRef }) {
   const canvasRef = useRef(null);
   const imageRef = useRef(null);
   const maskImgRef = useRef(null);
@@ -124,6 +125,9 @@ export default function Banner({ onReady, textStartRef, movingText }) {
           <h1>I'm Nikhil Kachi</h1>
           <h2>Front-End <div ref={textStartRef} style={{ display: "inline-block" }}>Developer</div></h2>
           {/* <h2 ref={movingText} style={{ zIndex: 1000 }}>Developer</h2> */}
+          <div className="skills-section-container">
+            <Skills />
+          </div>
         </div>
         <div className="col-2">
           <div className="reveal-text">

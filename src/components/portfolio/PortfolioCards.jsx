@@ -8,6 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function PortfolioCards() {
   const cardsRef = useRef([]);
   const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -16,6 +17,8 @@ export default function PortfolioCards() {
         setProjects(res.data);
       } catch (err) {
         console.error("Error loading projects", err);
+      } finally {
+        setLoading(false); 
       }
     };
 
@@ -42,6 +45,26 @@ useEffect(() => {
   });
 }, [projects]); 
 
+if (loading) {
+  return (
+    <>
+    <p style={{ textAlign: "center", marginTop: 20, opacity: 0.7 }}>
+        My portfolio server is waking up (free tier).  
+Thanks for your patience!
+      </p>
+    <div className="portfolio-container">
+      {[1,2,3].map((n) => (
+        <div key={n} className="skeleton-card skeleton">
+          {/* looks like loading project preview */}
+        </div>
+      ))}
+
+      
+    </div>
+    
+    </>
+  );
+}
 
 
   return (
