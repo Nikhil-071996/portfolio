@@ -25,7 +25,7 @@ export default function PortfolioCards() {
       } catch (err) {
         console.error("Error loading projects", err);
       } finally {
-        setLoading(true);
+        setLoading(false);
       }
     };
 
