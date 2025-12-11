@@ -20,7 +20,7 @@ export default function PortfolioCards() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}projects`);
+        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}projects/get-all`);
         setProjects(res.data);
       } catch (err) {
         console.error("Error loading projects", err);
